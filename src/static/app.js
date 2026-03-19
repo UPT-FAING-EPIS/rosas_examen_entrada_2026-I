@@ -35,6 +35,34 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = name;
         activitySelect.appendChild(option);
       });
+
+      // Add delete events
+      document.querySelectorAll(".delete-icon").forEach(icon => {
+          icon.addEventListener("click", async (e) => {
+              const activityName = e.target.getAttribute("data-activity");
+              const email = e.target.getAttribute("data-email");
+              try {
+                  const r = await fetch(/activities//participants/, {
+                      method: "DELETE"
+                  });
+                  if(r.ok) fetchActivities();
+              } catch(err) { console.error(err); }
+          });
+      });
+
+      // Add delete events
+      document.querySelectorAll(".delete-icon").forEach(icon => {
+          icon.addEventListener("click", async (e) => {
+              const activityName = e.target.getAttribute("data-activity");
+              const email = e.target.getAttribute("data-email");
+              try {
+                  const r = await fetch(/activities//participants/, {
+                      method: "DELETE"
+                  });
+                  if(r.ok) fetchActivities();
+              } catch(err) { console.error(err); }
+          });
+      });
     } catch (error) {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
       console.error("Error fetching activities:", error);
@@ -61,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ok) {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
-        signupForm.reset();
+        signupForm.reset();\n        fetchActivities();\n        fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
